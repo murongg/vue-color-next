@@ -1,0 +1,146 @@
+.vc-saturation,
+.vc-saturation--white,
+.vc-saturation--black {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.vc-saturation--white {
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+}
+
+.vc-saturation--black {
+  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+}
+
+.vc-saturation-pointer {
+  cursor: pointer;
+  position: absolute;
+}
+
+.vc-saturation-circle {
+  cursor: head;
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0, 0, 0, .3), 0 0 1px 2px rgba(0, 0, 0, .4);
+  border-radius: 50%;
+  transform: translate(-2px, -2px);
+}
+
+
+.vc-hue {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 2px;
+}
+
+.vc-hue--horizontal {
+  background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+}
+
+.vc-hue--vertical {
+  background: linear-gradient(to top, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+}
+
+.vc-hue-container {
+  cursor: pointer;
+  margin: 0 2px;
+  position: relative;
+  height: 100%;
+}
+
+.vc-hue-pointer {
+  z-index: 2;
+  position: absolute;
+}
+
+.vc-hue-picker {
+  cursor: pointer;
+  margin-top: 1px;
+  width: 4px;
+  border-radius: 1px;
+  height: 8px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .6);
+  background: #fff;
+  transform: translateX(-2px);
+}
+
+.vc-alpha {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.vc-alpha-checkboard-wrap {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.vc-alpha-gradient {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.vc-alpha-container {
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  margin: 0 3px;
+}
+
+.vc-alpha-pointer {
+  z-index: 2;
+  position: absolute;
+}
+
+.vc-alpha-picker {
+  cursor: pointer;
+  width: 4px;
+  border-radius: 1px;
+  height: 8px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .6);
+  background: #fff;
+  margin-top: 1px;
+  transform: translateX(-2px);
+}
+
+.vc-checkerboard {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-size: contain;
+}
+
+.vc-editable-input {
+  position: relative;
+}
+
+.vc-input__input {
+  padding: 0;
+  border: 0;
+  outline: none;
+  color: #333;
+}
+
+.vc-input__label {
+  text-transform: capitalize;
+}

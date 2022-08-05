@@ -1,3 +1,3 @@
 {
-  "extends": "@murongg"
+  "extends": "@murongg/vue"
 }
