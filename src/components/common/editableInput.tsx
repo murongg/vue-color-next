@@ -95,8 +95,8 @@ export const EditableInput = defineComponent({
           onInput={update}
           ref="input"
         />
-        <span class="vc-input__label" id={labelId}>{{ labelSpanText }}</span>
-        <span class="vc-input__desc">{{ desc }}</span>
+        <span class="vc-input__label" id={labelId}>{labelSpanText}</span>
+        <span class="vc-input__desc">{desc}</span>
       </div>
     )
   },
