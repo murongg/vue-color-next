@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ModelValue } from '../../../src/types'
-const colors = ref<ModelValue>('#194d33e6')
+const colors = ref<ModelValue>('#ff0000')
 </script>
 
 <template>
