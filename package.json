@@ -2,7 +2,7 @@
   "name": "vue-color-next",
   "version": "0.0.0",
   "packageManager": "pnpm@7.1.5",
-  "description": "",
+  "description": "🎨 Vue Color Picker Component for Vue 3.x",
   "author": "MuRong <admin@imuboy.cn>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/murongg",
@@ -14,7 +14,14 @@
   "bugs": {
     "url": "https://github.com/murongg/vue-color-next/issues"
   },
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "vue3",
+    "color",
+    "color picker",
+    "component",
+    "picker"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
