@@ -2,7 +2,7 @@ import { throttle } from 'throttle-debounce'
 import clamp from 'clamp'
 import { computed, defineComponent, ref } from 'vue-demi'
 import { mouseChange } from '../../helpers/common'
-import { useColor } from '../../composables/color'
+import type { ColorObject } from '../../types'
 
 const throttleHandler = throttle(20, (fn: Function, data: any) => {
   fn(data)
@@ -10,16 +10,20 @@ const throttleHandler = throttle(20, (fn: Function, data: any) => {
 
 export const Saturation = defineComponent({
   name: 'Saturation',
-  setup() {
+  props: {
+    colors: Object,
+  },
+  emits: ['change'],
+  setup(props, { emit }) {
     const container = ref<HTMLElement | null>(null)
-    const { colors, setColor } = useColor()
+    const colors = props.colors as ColorObject
 
     const bgColor = computed(() => `hsl(${colors?.hsv.h}, 100%, 50%)`)
     const pointerTop = computed(() => `${(-((colors?.hsv?.v || 0) * 100) + 1) + 100}%`)
     const pointerLeft = computed(() => `${(colors?.hsv?.s || 0) * 100}%`)
 
     const onChange = (param: any) => {
-      setColor(param)
+      emit('change', param)
     }
 
     const handleChange = (e: MouseEvent | TouchEvent, skip = false) => {

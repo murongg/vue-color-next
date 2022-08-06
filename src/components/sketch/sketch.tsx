@@ -7,6 +7,7 @@ import { EditableInput } from '../common/editableInput'
 import { Hue } from '../common/hue'
 import { isTransparent, isValidHex } from '../../helpers/color'
 import { sketchProps } from './sketch.types'
+
 export const Sketch = defineComponent({
   name: 'Sketch',
   props: sketchProps,
@@ -62,6 +63,7 @@ export const Sketch = defineComponent({
 
     return {
       colors,
+      setColor,
       inputChange,
       activeColor,
       hex,
@@ -69,20 +71,20 @@ export const Sketch = defineComponent({
     }
   },
   render() {
-    const { colors, disableAlpha, disableFields, activeColor, inputChange, handlePreset, hex, presetColors } = this
+    const { colors, setColor, disableAlpha, disableFields, activeColor, inputChange, handlePreset, hex, presetColors } = this
     return (
       <div role="application" aria-label="Sketch color picker" class={['vc-sketch', disableAlpha ? 'vc-sketch__disable-alpha' : '']}>
         <div class="vc-sketch-saturation-wrap">
-          <Saturation />
+          <Saturation colors={colors} onChange={setColor} />
         </div>
         <div class="vc-sketch-controls">
           <div class="vc-sketch-sliders">
             <div class="vc-sketch-hue-wrap">
-              <Hue />
+              <Hue colors={colors} onChange={setColor} />
             </div>
             {
               !disableAlpha && <div class="vc-sketch-alpha-wrap">
-                <Alpha />
+                <Alpha colors={colors} onChange={setColor} />
               </div>
             }
           </div>

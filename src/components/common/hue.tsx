@@ -1,10 +1,11 @@
 import { computed, defineComponent, ref, watch } from 'vue-demi'
-import { useColor } from '../../composables/color'
+import type { ColorObject } from '../../../dist'
 import { mouseChange } from '../../helpers/common'
 
 export const Hue = defineComponent({
   name: 'Hue',
   props: {
+    colors: Object,
     direction: {
       type: String,
       // [horizontal | vertical]
@@ -13,9 +14,9 @@ export const Hue = defineComponent({
     },
   },
   emits: ['change'],
-  setup(props) {
+  setup(props, { emit }) {
     const container = ref<HTMLElement | null>(null)
-    const { colors, setColor } = useColor()
+    const colors = props.colors as ColorObject
     const oldHue = ref(0)
     const pullDirection = ref('')
 
@@ -80,7 +81,7 @@ export const Hue = defineComponent({
         }
 
         if (colors.hsl.h !== h) {
-          setColor({
+          emit('change', {
             color: {
               h,
               s: colors.hsl.s,
@@ -104,7 +105,7 @@ export const Hue = defineComponent({
         }
 
         if (colors.hsl.h !== h) {
-          setColor({
+          emit('change', {
             color: {
               h,
               s: colors.hsl.s,
@@ -133,7 +134,6 @@ export const Hue = defineComponent({
 
     return {
       container,
-      colors,
       directionClass,
       pointerTop,
       pointerLeft,

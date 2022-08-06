@@ -22,9 +22,10 @@ export function _colorChange(data: ModelValue, oldHue?: number): ColorObject {
     source: typeof data === 'string' ? '' : data.source,
   }
 }
-const colors = reactive<ColorObject>(_colorChange('#ff0000'))
 
 export function useColor() {
+  const colors = reactive<ColorObject>(_colorChange('#ff0000'))
+
   function setColor(data: ModelValue) {
     const { hsl, hex, hex8, rgba, hsv, oldHue, a } = _colorChange(data)
     colors.a = a

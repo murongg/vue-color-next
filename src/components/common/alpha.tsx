@@ -1,14 +1,17 @@
 import { computed, defineComponent, ref } from 'vue-demi'
-import { useColor } from '../../composables/color'
+import type { ColorObject } from '../../../dist'
 import { mouseChange } from '../../helpers/common'
 import { Checkboard } from './checkboard'
 
 export const Alpha = defineComponent({
   name: 'Alpha',
-  setup() {
+  props: {
+    colors: Object,
+  },
+  emits: ['change'],
+  setup(props, { emit }) {
     const container = ref<HTMLElement | null>(null)
-
-    const { colors, setColor } = useColor()
+    const colors = props.colors as ColorObject
     const gradientColor = computed(() => {
       const rgba = colors.rgba
       if (rgba) {
@@ -32,7 +35,7 @@ export const Alpha = defineComponent({
       else
         a = Math.round(left * 100 / containerWidth) / 100
       if (colors.a !== a) {
-        setColor({
+        emit('change', {
           color: {
             h: colors.hsl.h,
             s: colors.hsl.s,
@@ -61,7 +64,6 @@ export const Alpha = defineComponent({
 
     return {
       container,
-      colors,
       gradientColor,
       handleChange,
       handleMouseDown,
