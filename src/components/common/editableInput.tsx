@@ -19,7 +19,7 @@ export const EditableInput = defineComponent({
     const input = ref<HTMLInputElement | null>(null)
     const val = computed<string | number>({
       get() {
-        return props.modelValue || ''
+        return props.modelValue || 0
       },
       set(v: string | number) {
         if (!(props.max === undefined) && +v > props.max) {

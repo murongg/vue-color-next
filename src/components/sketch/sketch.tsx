@@ -1,4 +1,4 @@
-import { Fragment, computed, defineComponent } from 'vue-demi'
+import { Fragment, computed, defineComponent, toRefs, watch } from 'vue-demi'
 import { useColor } from '../../composables/color'
 import { Saturation } from '../common/saturation'
 import { Alpha } from '../common/alpha'
@@ -6,6 +6,7 @@ import { Checkboard } from '../common/checkboard'
 import { EditableInput } from '../common/editableInput'
 import { Hue } from '../common/hue'
 import { isTransparent, isValidHex } from '../../helpers/color'
+import type { ModelValue } from '../../types'
 import { sketchProps } from './sketch.types'
 
 export const Sketch = defineComponent({
@@ -18,17 +19,33 @@ export const Sketch = defineComponent({
     setColor(modelValue.value)
 
     const hex = computed(() => {
-      const result = colors.a < 1 ? colors.hex8 : colors.hex
-      return result.replace('#', '')
+      const result = (colors.a || 0) < 1 ? colors.hex8 : colors.hex
+      return result?.replace('#', '')
     })
 
     const activeColor = computed(() => {
       const rgba = colors.rgba
-      return `rgba(${[rgba.r, rgba.g, rgba.b, rgba.a].join(',')})`
+      return `rgba(${[rgba?.r, rgba?.g, rgba?.b, rgba?.a].join(',')})`
     })
 
     watch(colors, () => {
-      emit('update:modelValue', colors)
+      let value: ModelValue = ''
+      if (typeof modelValue.value === 'string') {
+        value = colors.hex8 || ''
+      }
+      else {
+        value = {
+          hsl: colors.hsl,
+          hex: colors.hex,
+          hex8: colors.hex8,
+          rgba: colors.rgba,
+          rgb: colors.rgb,
+          hsv: colors.hsv,
+          format: colors.format,
+          a: colors.a,
+        }
+      }
+      emit('update:modelValue', value)
     })
 
     const inputChange = (data: any) => {
@@ -37,17 +54,17 @@ export const Sketch = defineComponent({
 
       if (data.hex) {
         isValidHex(data.hex) && setColor({
-          color: data.hex,
+          hex: data.hex,
           source: 'hex',
         })
       }
       else if (data.r || data.g || data.b || data.a) {
         setColor({
-          color: {
-            r: data.r || colors.rgba.r,
-            g: data.g || colors.rgba.g,
-            b: data.b || colors.rgba.b,
-            a: data.a || colors.rgba.a,
+          rgba: {
+            r: data.r || colors.rgba?.r,
+            g: data.g || colors.rgba?.g,
+            b: data.b || colors.rgba?.b,
+            a: data.a || colors.rgba?.a,
           },
           source: 'rgba',
         })
@@ -56,7 +73,7 @@ export const Sketch = defineComponent({
 
     const handlePreset = (c: string) => {
       setColor({
-        color: c,
+        hex: c,
         source: 'hex',
       })
     }
@@ -98,16 +115,16 @@ export const Sketch = defineComponent({
             <EditableInput label="hex" modelValue={hex} onChange={inputChange}></EditableInput>
           </div>
           <div class="vc-sketch-field--single">
-            <EditableInput label="r" modelValue={colors.rgba.r} onChange={inputChange}></EditableInput>
+            <EditableInput label="r" modelValue={colors.rgba?.r} onChange={inputChange}></EditableInput>
           </div>
           <div class="vc-sketch-field--single">
-            <EditableInput label="g" modelValue={colors.rgba.g} onChange={inputChange}></EditableInput>
+            <EditableInput label="g" modelValue={colors.rgba?.g} onChange={inputChange}></EditableInput>
           </div>
           <div class="vc-sketch-field--single">
-            <EditableInput label="b" modelValue={colors.rgba.b} onChange={inputChange}></EditableInput>
+            <EditableInput label="b" modelValue={colors.rgba?.b} onChange={inputChange}></EditableInput>
           </div>
           {!disableAlpha && <div class="vc-sketch-field--single" >
-            <EditableInput label="a" modelValue={colors.a} rrow-offset={0.01} max={1} onChange={inputChange}></EditableInput>
+            <EditableInput label="a" modelValue={colors.a} arrow-offset={0.01} max={1} onChange={inputChange}></EditableInput>
           </div>}
         </div>}
 

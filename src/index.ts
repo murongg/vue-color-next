@@ -4,8 +4,8 @@ import version from './version'
 const VueColor = makeInstaller([...components])
 
 const install = VueColor.install
-
 export * from './types'
+export * from './components'
 
 export {
   version,

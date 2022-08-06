@@ -82,7 +82,7 @@ export const Hue = defineComponent({
 
         if (colors.hsl.h !== h) {
           emit('change', {
-            color: {
+            hsl: {
               h,
               s: colors.hsl.s,
               l: colors.hsl.l,
@@ -106,7 +106,7 @@ export const Hue = defineComponent({
 
         if (colors.hsl.h !== h) {
           emit('change', {
-            color: {
+            hsl: {
               h,
               s: colors.hsl.s,
               l: colors.hsl.l,

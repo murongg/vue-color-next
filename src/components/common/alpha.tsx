@@ -36,13 +36,13 @@ export const Alpha = defineComponent({
         a = Math.round(left * 100 / containerWidth) / 100
       if (colors.a !== a) {
         emit('change', {
-          color: {
+          hsl: {
             h: colors.hsl.h,
             s: colors.hsl.s,
             l: colors.hsl.l,
-            a,
           },
-          source: 'rgba',
+          a,
+          source: 'hsl',
         })
       }
     }

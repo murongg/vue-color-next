@@ -1,19 +1,20 @@
-export type ModelValue = string | ModelValueObject
-export interface ModelValueObject {
-  color: tinycolor.ColorInput
-  a?: number
-  source?: string
-}
+import type tinycolor from 'tinycolor2'
+
+export type ModelValue = string | Omit<ColorObject, 'oldHue' | 'source'>
+
+export type Source = 'hsl' | 'hex' | 'hex8' | 'rgba' | 'rgb' | 'hsv'
 
 export interface ColorObject {
-  hsl: tinycolor.ColorFormats.HSLA
-  hex: string
-  hex8: string
-  rgba: tinycolor.ColorFormats.RGBA
-  hsv: tinycolor.ColorFormats.HSVA
-  oldHue: number
-  a: number
-  source?: string
+  hsl?: tinycolor.ColorFormats.HSLA
+  hex?: string
+  hex8?: string
+  rgba?: tinycolor.ColorFormats.RGBA
+  rgb?: tinycolor.ColorFormats.RGB
+  hsv?: tinycolor.ColorFormats.HSVA
+  format?: string
+  oldHue?: number
+  a?: number
+  source?: Source
 }
 
 export * from './components/types'

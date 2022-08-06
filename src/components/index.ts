@@ -3,6 +3,10 @@ import {
   Sketch,
 } from './sketch'
 
+export {
+  Sketch,
+}
+
 export default [
   Sketch,
 ] as Plugin[]

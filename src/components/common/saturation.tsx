@@ -18,7 +18,7 @@ export const Saturation = defineComponent({
     const container = ref<HTMLElement | null>(null)
     const colors = props.colors as ColorObject
 
-    const bgColor = computed(() => `hsl(${colors?.hsv.h}, 100%, 50%)`)
+    const bgColor = computed(() => `hsl(${colors.hsv?.h}, 100%, 50%)`)
     const pointerTop = computed(() => `${(-((colors?.hsv?.v || 0) * 100) + 1) + 100}%`)
     const pointerLeft = computed(() => `${(colors?.hsv?.s || 0) * 100}%`)
 
@@ -37,12 +37,12 @@ export const Saturation = defineComponent({
       const saturation = left / containerWidth
       const bright = clamp(-(top / containerHeight) + 1, 0, 1)
       throttleHandler(onChange, {
-        color: {
-          h: colors?.hsv.h,
+        hsv: {
+          h: colors.hsv?.h,
           s: saturation,
           v: bright,
-          a: colors?.hsv.a,
         },
+        a: colors.hsv?.a,
         source: 'hsva',
       })
     }

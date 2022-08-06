@@ -1,32 +1,53 @@
 import tinycolor from 'tinycolor2'
 import { reactive } from 'vue-demi'
-import type { ColorObject, ModelValue } from '../types'
+import type { ColorObject } from '../types'
 
-export function _colorChange(data: ModelValue, oldHue?: number): ColorObject {
-  const color = typeof data === 'string' ? tinycolor(data) : tinycolor(data.color)
-  const alpha = typeof data === 'string' ? 1 : color.getAlpha()
+export function _colorChange(data: ColorObject | string, oldHue?: number): ColorObject {
+  let color: tinycolor.Instance | undefined
 
-  color.setAlpha(alpha || 1)
+  if (typeof data === 'string')
+    color = tinycolor(data)
+  else if (data.hsl)
+    color = tinycolor(data.hsl)
+  else if (data.hex && data.hex.length > 0)
+    color = tinycolor(data.hex)
+  else if (data.hsv)
+    color = tinycolor(data.hsv)
+  else if (data.rgba)
+    color = tinycolor(data.rgba)
+  else if (data.rgb)
+    color = tinycolor(data.rgb)
 
-  const hsl = color.toHsl()
-  const hsv = color.toHsv()
+  const alpha = typeof data === 'string' ? 1 : color?.getAlpha()
+
+  color?.setAlpha(alpha || 1)
+
+  const hsl = color?.toHsl()
+  const hsv = color?.toHsv()
+  const rgba = color?.toRgb()
 
   return {
     hsl,
-    hex: color.toHexString().toUpperCase(),
-    hex8: color.toHex8String().toUpperCase(),
-    rgba: color.toRgb(),
+    hex: color?.toHexString().toUpperCase(),
+    hex8: color?.toHex8String().toUpperCase(),
+    rgba,
+    rgb: {
+      r: rgba!.r,
+      g: rgba!.g,
+      b: rgba!.b,
+    },
     hsv,
-    oldHue: oldHue || hsl.h,
-    a: color.getAlpha(),
-    source: typeof data === 'string' ? '' : data.source,
+    oldHue: oldHue || hsl?.h,
+    a: color?.getAlpha(),
+    format: color?.getFormat(),
+    source: typeof data === 'string' ? undefined : data.source,
   }
 }
 
 export function useColor() {
-  const colors = reactive<ColorObject>(_colorChange('#ff0000'))
+  const colors = reactive<ColorObject>({})
 
-  function setColor(data: ModelValue) {
+  function setColor(data: ColorObject | string) {
     const { hsl, hex, hex8, rgba, hsv, oldHue, a } = _colorChange(data)
     colors.a = a
     colors.hsl = hsl
