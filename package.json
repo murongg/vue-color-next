@@ -1,6 +1,6 @@
 {
   "name": "vue-color-next",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packageManager": "pnpm@7.1.5",
   "description": "🎨 Vue Color Picker Component for Vue 3.x",
   "author": "MuRong <admin@imuboy.cn>",
@@ -55,7 +55,7 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
     "prepublishOnly": "nr build",
-    "genrate-version": "esno scripts/genrate-version.ts",
+    "genrate-version": "esno scripts/genrate-version.ts && git add .",
     "release": "bumpp --commit --push --tag --execute \"npm run genrate-version\" && pnpm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
