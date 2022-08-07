@@ -6,7 +6,7 @@ const VueColor = makeInstaller([...components])
 const install = VueColor.install
 export * from './types'
 export * from './components'
-
+export * from './composables'
 export {
   version,
   components,

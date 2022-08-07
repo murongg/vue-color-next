@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref } from 'vue-demi'
+import { computed, defineComponent, ref, toRefs } from 'vue-demi'
 import { useColor } from '../../composables/color'
 import { isValidHex } from '../../helpers/color'
 import { Alpha } from '../common/alpha'
@@ -13,7 +13,8 @@ export const Chrome = defineComponent({
   props: chormeProps,
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const { colors, setColor, watchColor } = useColor(props)
+    const { modelValue } = toRefs(props)
+    const { colors, setColor, watchColor } = useColor(modelValue)
 
     watchColor((value) => {
       emit('update:modelValue', value)

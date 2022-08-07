@@ -1,4 +1,4 @@
-import { Fragment, computed, defineComponent } from 'vue-demi'
+import { Fragment, computed, defineComponent, toRefs } from 'vue-demi'
 import { useColor } from '../../composables/color'
 import { Saturation } from '../common/saturation'
 import { Alpha } from '../common/alpha'
@@ -13,7 +13,8 @@ export const Sketch = defineComponent({
   props: sketchProps,
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const { colors, setColor, watchColor } = useColor(props)
+    const { modelValue } = toRefs(props)
+    const { colors, setColor, watchColor } = useColor(modelValue)
 
     watchColor((value) => {
       emit('update:modelValue', value)

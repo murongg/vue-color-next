@@ -1,4 +1,5 @@
 import type tinycolor from 'tinycolor2'
+import type { Ref } from 'vue-demi'
 
 export type ModelValue = string | Omit<ColorObject, 'oldHue' | 'source'>
 
@@ -17,5 +18,7 @@ export interface ColorObject {
   a?: number
   source?: Source
 }
+
+export type MaybeRef<T> = Ref<T> | T
 
 export * from './components/types'

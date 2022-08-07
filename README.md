@@ -70,6 +70,34 @@ const colors = ref('#ff0000')
 - [ ] Grayscale
 - [ ] Swatches
 - [ ] Twitter
+
+## Composables
+- [x] useColor
+
+## Types
+```ts
+type ModelValue = string | Omit<ColorObject, 'oldHue' | 'source'>;
+type Source = 'hsl' | 'hex' | 'hex8' | 'rgba' | 'rgb' | 'hsv';
+interface ColorObject {
+  hsl?: tinycolor.ColorFormats.HSL;
+  hsla?: tinycolor.ColorFormats.HSLA;
+  hex?: string;
+  hex8?: string;
+  rgba?: tinycolor.ColorFormats.RGBA;
+  rgb?: tinycolor.ColorFormats.RGB;
+  hsv?: tinycolor.ColorFormats.HSVA;
+  format?: string;
+  oldHue?: number;
+  a?: number;
+  source?: Source;
+}
+function useColor<T = ModelValue>(initValue: MaybeRef<T>): {
+  setColor: (data: ColorObject | string) => void;
+  watchColor: (callback: (value: string | ModelValue) => void) => void;
+  colors: ColorObject;
+}
+```
+
 ## 🌸 Inspires
 
 - [xiaokaike/vue-color](https://github.com/xiaokaike/vue-color)

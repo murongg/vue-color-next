@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2'
-import { reactive, watch } from 'vue-demi'
-import type { ColorObject, ModelValue } from '../types'
+import { isRef, reactive, unref, watch } from 'vue-demi'
+import type { ColorObject, MaybeRef, ModelValue } from '../types'
 
 export function _colorChange(data: ColorObject | string, oldHue?: number): ColorObject {
   let color: tinycolor.Instance | undefined
@@ -50,7 +50,7 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
   }
 }
 
-export function useColor(props: any) {
+export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
   const colors = reactive<ColorObject>({})
 
   function setColor(data: ColorObject | string) {
@@ -64,21 +64,24 @@ export function useColor(props: any) {
     colors.hsv = hsv
     colors.oldHue = oldHue
   }
-  setColor(props.modelValue)
-  watch(() => props.modelValue, (value, oldValue) => {
-    if (typeof props.modelValue === 'string') {
-      if (value !== oldValue)
-        setColor(value)
-    }
-    else {
-      if (value.hex !== oldValue.hex)
-        setColor(value)
-    }
-  })
+  setColor(unref(initValue))
+  if (isRef(initValue)) {
+    watch(initValue, (value, oldValue) => {
+      if (typeof initValue.value === 'string') {
+        if (value !== oldValue)
+          setColor(value)
+      }
+      else {
+        if ((initValue.value as ColorObject).hex !== (oldValue as ColorObject).hex)
+          setColor(value)
+      }
+    })
+  }
+
   const watchColor = (callback: (value: string | ModelValue) => void) => {
     watch(colors, () => {
       let value: string | ModelValue = ''
-      if (typeof props.modelValue === 'string') {
+      if (typeof unref(initValue) === 'string') {
         value = colors.hex8 || ''
       }
       else {
