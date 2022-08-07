@@ -1,10 +1,12 @@
 import path from 'path'
+import { readFileSync } from 'fs'
 import type { Options as ESBuildOptions } from 'rollup-plugin-esbuild'
 import esbuild from 'rollup-plugin-esbuild'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import type { OutputOptions, RollupOptions } from 'rollup'
+import type { OutputOptions } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 
 const input = path.join(__dirname, '../src/index.ts')
@@ -23,6 +25,14 @@ const esbuildMinifer = (options: ESBuildOptions): any => {
     name: 'esbuild-minifer',
     renderChunk,
   }
+}
+
+const VUE_DEMI_IIFE = readFileSync(require.resolve('vue-demi/lib/index.iife.js'), 'utf-8')
+const injectVueDemi = {
+  name: 'inject-vue-demi',
+  renderChunk(code: string) {
+    return `${VUE_DEMI_IIFE};\n;${code}`
+  },
 }
 
 const plugins: any = [
@@ -50,25 +60,31 @@ const output: OutputOptions[] = [
   {
     file: 'dist/index.cjs',
     format: 'cjs',
+    plugins,
   },
   {
     file: 'dist/index.mjs',
     format: 'es',
+    plugins,
   },
   {
     file: 'dist/index.iife.js',
     format: 'iife',
     name: globalName,
-    extend: true,
     globals,
+    plugins: [
+      injectVueDemi,
+      ...plugins,
+    ],
   },
   {
     file: 'dist/index.iife.min.js',
     format: 'iife',
     name: globalName,
-    extend: true,
     globals,
     plugins: [
+      injectVueDemi,
+      ...plugins,
       esbuildMinifer({
         minify: true,
       }),
@@ -80,12 +96,11 @@ const output: OutputOptions[] = [
     exports: 'named',
     name: globalName,
     globals,
-    extend: true,
     sourcemap: true,
     plugins: [
-      (nodeResolve({
-        extensions: ['.mjs', '.js', '.json', '.ts'],
-      }) as any),
+      commonjs(),
+      ...plugins,
+      (nodeResolve() as any),
     ],
   },
   {
@@ -94,12 +109,11 @@ const output: OutputOptions[] = [
     exports: 'named',
     name: globalName,
     globals,
-    extend: true,
     sourcemap: true,
     plugins: [
-      (nodeResolve({
-        extensions: ['.mjs', '.js', '.json', '.ts'],
-      }) as any),
+      commonjs(),
+      ...plugins,
+      (nodeResolve() as any),
       esbuildMinifer({
         minify: true,
       }),
@@ -107,14 +121,7 @@ const output: OutputOptions[] = [
   },
 ]
 
-const config: RollupOptions = {
-  input,
-  output,
-  plugins,
-  external: externals,
-}
-
-const configs = [config, {
+const configs: any = [{
   input,
   output: {
     file: 'dist/index.d.ts',
@@ -125,5 +132,14 @@ const configs = [config, {
     (dts() as any),
   ],
 }]
+
+output.forEach((item) => {
+  configs.push({
+    input,
+    output: item,
+    plugins: item.plugins,
+    external: externals,
+  })
+})
 
 export default configs
