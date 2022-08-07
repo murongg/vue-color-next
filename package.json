@@ -32,7 +32,7 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "unpkg": "./dist/index.min.js",
+  "unpkg": "./dist/index.umd.min.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
