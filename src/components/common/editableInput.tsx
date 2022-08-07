@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue-demi'
 
 export const EditableInput = defineComponent({
   name: 'EditableInput',

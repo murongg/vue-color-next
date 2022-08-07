@@ -1,5 +1,5 @@
-import type { PropType } from 'vue'
-import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue-demi'
+import { computed, defineComponent } from 'vue-demi'
 
 const _checkboardCache: Record<string, any> = {}
 

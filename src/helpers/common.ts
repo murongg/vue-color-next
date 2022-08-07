@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref } from 'vue-demi'
 
 export function mouseChange(e: MouseEvent | TouchEvent, skip = false, container: Ref<HTMLElement | null>) {
   !skip && e.preventDefault()
