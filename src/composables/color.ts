@@ -1,12 +1,13 @@
 import tinycolor from 'tinycolor2'
-import { reactive } from 'vue-demi'
-import type { ColorObject } from '../types'
+import { reactive, watch } from 'vue-demi'
+import type { ColorObject, ModelValue } from '../types'
 
 export function _colorChange(data: ColorObject | string, oldHue?: number): ColorObject {
   let color: tinycolor.Instance | undefined
-
   if (typeof data === 'string')
     color = tinycolor(data)
+  else if (data.hsla)
+    color = tinycolor(data.hsla)
   else if (data.hsl)
     color = tinycolor(data.hsl)
   else if (data.hex && data.hex.length > 0)
@@ -18,16 +19,21 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
   else if (data.rgb)
     color = tinycolor(data.rgb)
 
-  const alpha = typeof data === 'string' ? 1 : color?.getAlpha()
+  const alpha = typeof data === 'string' ? color?.getAlpha() : (data.a || color?.getAlpha())
 
   color?.setAlpha(alpha || 1)
 
-  const hsl = color?.toHsl()
+  const hsla = color?.toHsl()
   const hsv = color?.toHsv()
   const rgba = color?.toRgb()
 
   return {
-    hsl,
+    hsl: {
+      h: hsla?.h || 0,
+      s: hsla?.s || 0,
+      l: hsla?.l || 0,
+    },
+    hsla,
     hex: color?.toHexString().toUpperCase(),
     hex8: color?.toHex8String().toUpperCase(),
     rgba,
@@ -37,19 +43,20 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
       b: rgba!.b,
     },
     hsv,
-    oldHue: oldHue || hsl?.h,
+    oldHue: oldHue || hsla?.h,
     a: color?.getAlpha(),
     format: color?.getFormat(),
     source: typeof data === 'string' ? undefined : data.source,
   }
 }
 
-export function useColor() {
+export function useColor(props: any) {
   const colors = reactive<ColorObject>({})
 
   function setColor(data: ColorObject | string) {
-    const { hsl, hex, hex8, rgba, hsv, oldHue, a } = _colorChange(data)
+    const { hsl, hsla, hex, hex8, rgba, hsv, oldHue, a } = _colorChange(data)
     colors.a = a
+    colors.hsla = hsla
     colors.hsl = hsl
     colors.hex = hex
     colors.hex8 = hex8
@@ -57,8 +64,43 @@ export function useColor() {
     colors.hsv = hsv
     colors.oldHue = oldHue
   }
+  setColor(props.modelValue)
+  watch(() => props.modelValue, (value, oldValue) => {
+    if (typeof props.modelValue === 'string') {
+      if (value !== oldValue)
+        setColor(value)
+    }
+    else {
+      if (value.hex !== oldValue.hex)
+        setColor(value)
+    }
+  })
+  const watchColor = (callback: (value: string | ModelValue) => void) => {
+    watch(colors, () => {
+      let value: string | ModelValue = ''
+      if (typeof props.modelValue === 'string') {
+        value = colors.hex8 || ''
+      }
+      else {
+        value = {
+          hsl: colors.hsl,
+          hsla: colors.hsla,
+          hex: colors.hex,
+          hex8: colors.hex8,
+          rgba: colors.rgba,
+          rgb: colors.rgb,
+          hsv: colors.hsv,
+          format: colors.format,
+          a: colors.a,
+        }
+      }
+      callback(value)
+    })
+  }
+
   return {
     setColor,
+    watchColor,
     colors,
   }
 }
