@@ -1,6 +1,6 @@
 {
   "name": "vue-color-next",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "packageManager": "pnpm@7.1.5",
   "description": "🎨 Vue Color Picker Component for Vue 3.x",
   "author": "MuRong <admin@imuboy.cn>",
