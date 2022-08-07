@@ -19,7 +19,7 @@ describe('Sketch Component', () => {
   })
 
   it('test hue', async () => {
-    const wrapper = mount(() => <Sketch v-model={colors} />)
+    const wrapper = mount(() => <Sketch v-model={colors.value} />)
     const hue = wrapper.find('.vc-hue')
     expect(hue.classes()).toContain('vc-hue--horizontal')
     const hueContainer = wrapper.find('.vc-hue-container')
@@ -29,7 +29,7 @@ describe('Sketch Component', () => {
   })
 
   it('test alpha', async () => {
-    const wrapper = mount(() => <Sketch v-model={colors} />)
+    const wrapper = mount(() => <Sketch v-model={colors.value} />)
     const alphaPointer = wrapper.find('.vc-alpha-pointer')
     expect(alphaPointer.element.getAttribute('style')).toBe('left: 100%;')
   })
