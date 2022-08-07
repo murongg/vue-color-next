@@ -12,6 +12,7 @@ importers:
       '@rollup/plugin-node-resolve': ^13.3.0
       '@rollup/plugin-typescript': ^8.3.4
       '@types/clamp': ^1.0.1
+      '@types/fs-extra': ^9.0.13
       '@types/gulp': ^4.0.9
       '@types/gulp-clean-css': ^4.3.0
       '@types/gulp-rename': ^2.0.1
@@ -63,6 +64,7 @@ importers:
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.77.2
       '@rollup/plugin-typescript': 8.3.4_oo3i3f3qmqiztdz5qgxrrjmd5e
       '@types/clamp': 1.0.1
+      '@types/fs-extra': 9.0.13
       '@types/gulp': 4.0.9
       '@types/gulp-clean-css': 4.3.0
       '@types/gulp-rename': 2.0.1
@@ -886,6 +888,12 @@ packages:
 
   /@types/expect/1.20.4:
     resolution: {integrity: sha512-Q5Vn3yjTDyCMV50TB6VRIbQNxSE4OmZR86VSbGaNpfUolm0iePBB4KdEEHmxoY5sT2+2DIvXW0rvMDP2nHZ4Mg==}
+    dev: true
+
+  /@types/fs-extra/9.0.13:
+    resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
+    dependencies:
+      '@types/node': 17.0.45
     dev: true
 
   /@types/glob-stream/6.1.1:
