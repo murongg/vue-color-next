@@ -6,4 +6,6 @@ export function generateVersion() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const version = require('../package.json').version
   writeFileSync(basePath, `export default '${version}'`)
+  console.log('done .')
+
 }
