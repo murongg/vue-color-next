@@ -96,7 +96,7 @@
     "@vitejs/plugin-vue": "^3.0.1",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "@vue/composition-api": "^1.7.0",
-    "bumpp": "^7.1.1",
+    "bumpp": "^8.2.1",
     "esbuild-register": "^3.3.3",
     "eslint": "^8.16.0",
     "esno": "^0.16.3",
