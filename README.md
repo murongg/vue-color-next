@@ -60,6 +60,16 @@ const colors = ref('#ff0000')
   <sketch v-model="colors" />
 </template>
 ```
+## Components
+- [x] Sketch
+- [x] Chrome
+- [ ] Photoshop
+- [ ] Material
+- [ ] Slider
+- [ ] Compact
+- [ ] Grayscale
+- [ ] Swatches
+- [ ] Twitter
 ## 🌸 Inspires
 
 - [xiaokaike/vue-color](https://github.com/xiaokaike/vue-color)

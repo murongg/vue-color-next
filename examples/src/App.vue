@@ -17,12 +17,12 @@ const style = computed<StyleValue>(() => {
     <a href="https://github.com/murongg/vue-color-next" target="_blank" absolute text-4xl right-5 top-5 icon-btn i-carbon-logo-github />
     <div flex>
       <div flex flex-col mr-5>
-        <sketch v-model="colors" />
-        <span text-center mt-1>sketch</span>
+        <Sketch v-model="colors" />
+        <span text-center mt-1>Sketch</span>
       </div>
       <div flex flex-col mr-5>
-        <chrome v-model="colors" />
-        <span text-center mt-1>chrome</span>
+        <Chrome v-model="colors" />
+        <span text-center mt-1>Chrome</span>
       </div>
     </div>
   </main>
