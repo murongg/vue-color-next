@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue-demi'
+import { computed, ref, defineComponent } from 'vue-demi'
 import { useColor } from '../../composables/color'
 import { isValidHex } from '../../helpers/color'
 import { Alpha } from '../common/alpha'
