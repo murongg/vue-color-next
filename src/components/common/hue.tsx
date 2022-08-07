@@ -21,7 +21,7 @@ export const Hue = defineComponent({
     const pullDirection = ref('')
 
     watch(colors, () => {
-      const h = colors.hsl.h || 0
+      const h = colors.hsla?.h || 0
       if (h !== 0 && h - oldHue.value > 0)
         pullDirection.value = 'right'
       if (h !== 0 && h - oldHue.value < 0)
@@ -37,9 +37,9 @@ export const Hue = defineComponent({
     })
     const pointerTop = computed(() => {
       if (props.direction === 'vertical') {
-        if (colors.hsl.h === 0 && pullDirection.value === 'right')
+        if (colors.hsla?.h === 0 && pullDirection.value === 'right')
           return 0
-        return `${-(((colors.hsl.h || 0) * 100) / 360) + 100}%`
+        return `${-(((colors.hsla?.h || 0) * 100) / 360) + 100}%`
       }
       else {
         return '0'
@@ -51,9 +51,9 @@ export const Hue = defineComponent({
         return '0'
       }
       else {
-        if (colors.hsl.h === 0 && pullDirection.value === 'right')
+        if (colors.hsla?.h === 0 && pullDirection.value === 'right')
           return '100%'
-        return `${((colors.hsl?.h || 0) * 100) / 360}%`
+        return `${((colors.hsla?.h || 0) * 100) / 360}%`
       }
     })
 
@@ -80,15 +80,15 @@ export const Hue = defineComponent({
           h = (360 * percent / 100)
         }
 
-        if (colors.hsl.h !== h) {
+        if (colors.hsla?.h !== h) {
           emit('change', {
-            hsl: {
+            hsla: {
               h,
-              s: colors.hsl.s,
-              l: colors.hsl.l,
-              a: colors.hsl.a,
+              s: colors.hsla?.s,
+              l: colors.hsla?.l,
+              a: colors.hsla?.a,
             },
-            source: 'hsl',
+            source: 'hsla',
           })
         }
       }
@@ -104,15 +104,15 @@ export const Hue = defineComponent({
           h = (360 * percent / 100)
         }
 
-        if (colors.hsl.h !== h) {
+        if (colors.hsla?.h !== h) {
           emit('change', {
-            hsl: {
+            hsla: {
               h,
-              s: colors.hsl.s,
-              l: colors.hsl.l,
-              a: colors.hsl.a,
+              s: colors.hsla?.s,
+              l: colors.hsla?.l,
+              a: colors.hsla?.a,
             },
-            source: 'hsl',
+            source: 'hsla',
           })
         }
       }
@@ -147,7 +147,7 @@ export const Hue = defineComponent({
       <div class={['vc-hue', directionClass]}>
         <div class="vc-hue-container"
           role="slider"
-          aria-valuenow={colors?.hsl.h}
+          aria-valuenow={colors?.hsla?.h}
           aria-valuemin="0"
           aria-valuemax="360"
           ref="container"

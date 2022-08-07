@@ -34,15 +34,16 @@ export const Alpha = defineComponent({
         a = 1
       else
         a = Math.round(left * 100 / containerWidth) / 100
+
       if (colors.a !== a) {
         emit('change', {
-          hsl: {
-            h: colors.hsl.h,
-            s: colors.hsl.s,
-            l: colors.hsl.l,
+          hsla: {
+            h: colors.hsl?.h,
+            s: colors.hsl?.s,
+            l: colors.hsl?.l,
+            a,
           },
-          a,
-          source: 'hsl',
+          source: 'hsla',
         })
       }
     }

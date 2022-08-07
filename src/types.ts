@@ -5,7 +5,8 @@ export type ModelValue = string | Omit<ColorObject, 'oldHue' | 'source'>
 export type Source = 'hsl' | 'hex' | 'hex8' | 'rgba' | 'rgb' | 'hsv'
 
 export interface ColorObject {
-  hsl?: tinycolor.ColorFormats.HSLA
+  hsl?: tinycolor.ColorFormats.HSL
+  hsla?: tinycolor.ColorFormats.HSLA
   hex?: string
   hex8?: string
   rgba?: tinycolor.ColorFormats.RGBA

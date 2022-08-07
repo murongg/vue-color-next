@@ -1,4 +1,4 @@
-import { Fragment, computed, defineComponent, toRefs, watch } from 'vue-demi'
+import { Fragment, computed, defineComponent } from 'vue-demi'
 import { useColor } from '../../composables/color'
 import { Saturation } from '../common/saturation'
 import { Alpha } from '../common/alpha'
@@ -6,7 +6,6 @@ import { Checkboard } from '../common/checkboard'
 import { EditableInput } from '../common/editableInput'
 import { Hue } from '../common/hue'
 import { isTransparent, isValidHex } from '../../helpers/color'
-import type { ModelValue } from '../../types'
 import { sketchProps } from './sketch.types'
 
 export const Sketch = defineComponent({
@@ -14,9 +13,11 @@ export const Sketch = defineComponent({
   props: sketchProps,
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const { modelValue } = toRefs(props)
-    const { colors, setColor } = useColor()
-    setColor(modelValue.value)
+    const { colors, setColor, watchColor } = useColor(props)
+
+    watchColor((value) => {
+      emit('update:modelValue', value)
+    })
 
     const hex = computed(() => {
       const result = (colors.a || 0) < 1 ? colors.hex8 : colors.hex
@@ -26,26 +27,6 @@ export const Sketch = defineComponent({
     const activeColor = computed(() => {
       const rgba = colors.rgba
       return `rgba(${[rgba?.r, rgba?.g, rgba?.b, rgba?.a].join(',')})`
-    })
-
-    watch(colors, () => {
-      let value: ModelValue = ''
-      if (typeof modelValue.value === 'string') {
-        value = colors.hex8 || ''
-      }
-      else {
-        value = {
-          hsl: colors.hsl,
-          hex: colors.hex,
-          hex8: colors.hex8,
-          rgba: colors.rgba,
-          rgb: colors.rgb,
-          hsv: colors.hsv,
-          format: colors.format,
-          a: colors.a,
-        }
-      }
-      emit('update:modelValue', value)
     })
 
     const inputChange = (data: any) => {

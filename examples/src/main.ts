@@ -9,6 +9,7 @@ import './styles/main.css'
 import 'uno.css'
 import '../../src/styles/common.css'
 import '../../src/styles/sketch.css'
+import '../../src/styles/chrome.css'
 
 const app = createApp(App)
 const router = createRouter({
