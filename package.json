@@ -55,8 +55,8 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
     "prepublishOnly": "nr build",
-    "genrate-version": "esno scripts/genrate-version.ts && git add .",
-    "release": "bumpp --commit --push --tag --execute \"npm run genrate-version\" && pnpm publish",
+    "genrate-version": "esno scripts/genrate-version.ts",
+    "release": "esno scripts/release.ts && pnpm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
