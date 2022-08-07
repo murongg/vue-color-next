@@ -1,5 +1,6 @@
 import { execSync } from 'child_process'
 import { readJSONSync } from 'fs-extra'
+import { generateVersion } from './genrate-version'
 
 const { version: oldVersion } = readJSONSync('package.json')
 
@@ -12,7 +13,7 @@ if (oldVersion === version) {
   process.exit()
 }
 
-execSync('npm run genrate-version', { stdio: 'inherit' })
+generateVersion()
 execSync('git add .', { stdio: 'inherit' })
 
 execSync(`git commit -m "chore: release v${version}"`, { stdio: 'inherit' })
