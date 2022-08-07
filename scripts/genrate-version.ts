@@ -7,5 +7,4 @@ export function generateVersion() {
   const version = require('../package.json').version
   writeFileSync(basePath, `export default '${version}'`)
   console.log('done .')
-
 }
