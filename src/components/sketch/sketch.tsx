@@ -126,7 +126,7 @@ export const Sketch = defineComponent({
                     onClick={() => handlePreset(c)}>
                   </div>
                   : <div
-                    key="c"
+                    key={c}
                     aria-label={`Color:${c}`}
                     class="vc-sketch-presets-color"
                     onClick={() => handlePreset(c)}>

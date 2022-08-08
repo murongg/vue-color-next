@@ -88,7 +88,7 @@ export const EditableInput = defineComponent({
     return (
       <div class="vc-editable-input">
         <input
-          aria-labelledby="labelId"
+          aria-labelledby={labelId}
           class="vc-input__input"
           value={val}
           onKeydown={handleKeyDown}
