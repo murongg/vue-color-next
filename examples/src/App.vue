@@ -34,18 +34,18 @@ const colorObj = reactive<any>({
     </h2>
     <div mt-10 flex flex-wrap justify-between>
       <div
-        v-for="obj in Object.keys(colorObj)" :key="obj" mb-8 mr-8 flex-1 shadow-xl inline-block px-5 py-4 bg-white
+        v-for="obj in Object.keys(colorObj)" :key="obj" h="200px" mb-8 mr-8 flex-1 shadow-xl inline-block px-5 py-4 bg-white
         rounded-1 opacity-80 hover:opacity-100 :style="{ color: color }"
       >
         <div text="center" mb-2 font-extrabold>
           {{ obj.toLocaleUpperCase() }}
         </div>
-        <ul v-if="typeof colorObj[obj] === 'object'" text="center">
+        <ul v-if="typeof colorObj[obj] === 'object'" text="center sm">
           <li v-for="c in Object.keys(colorObj[obj])" :key="c">
             {{ c.toLocaleUpperCase() }} : {{ colorObj[obj][c] }}
           </li>
         </ul>
-        <div v-else text="center">
+        <div v-else text="center sm">
           {{ colorObj[obj] }}
         </div>
       </div>
