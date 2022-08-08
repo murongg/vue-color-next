@@ -63,6 +63,10 @@ const colorObj = reactive<any>({
         <Chrome v-model="colors" />
         <span text-center mt-1>Chrome</span>
       </div>
+      <div flex flex-col mr-5>
+        <Photoshop v-model="colors" />
+        <span text-center mt-1>Photoshop</span>
+      </div>
     </div>
   </main>
 </template>
