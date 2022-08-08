@@ -7,4 +7,5 @@ export const emits = [
   'update:rgba',
   'update:rgb',
   'update:hsv',
+  'update:hsva',
 ]
