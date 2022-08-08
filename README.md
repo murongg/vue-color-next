@@ -28,7 +28,7 @@ $ yarn add vue-color-next
 
 CDN:  https://unpkg.com/vue-color-next
 ```html
-<link rel="stylesheet" href="https://unpkg.com/vue-color-next/index.min.css">
+<link rel="stylesheet" href="https://unpkg.com/vue-color-next/dist/index.min.css">
 <script src="https://unpkg.com/vue-color-next"></script>
 <script>
   Vue.createApp(App).use(VueColor.VueColor)
@@ -44,7 +44,7 @@ main.js:
 import { createApp } from 'vue'
 import { VueColor } from 'vue-color-next'
 import App from './App.vue'
-import 'vue-color-next/index.css'
+import 'vue-color-next/dist/index.css'
 
 const app = createApp(App)
 app.use(VueColor)
