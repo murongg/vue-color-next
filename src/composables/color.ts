@@ -12,6 +12,8 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
     color = tinycolor(data.hsl)
   else if (data.hex && data.hex.length > 0)
     color = tinycolor(data.hex)
+  else if (data.hsva)
+    color = tinycolor(data.hsva)
   else if (data.hsv)
     color = tinycolor(data.hsv)
   else if (data.rgba)
@@ -25,12 +27,12 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
 
   color?.setAlpha(alpha || 1)
   const hsla = color?.toHsl()
-  const hsv = color?.toHsv()
+  const hsva = color?.toHsv()
   const rgba = color?.toRgb()
 
   if (hsla?.s === 0) {
     if (typeof data === 'object')
-      hsv!.h = hsla.h = data.hsla?.h || oldHue || 0
+      hsva!.h = hsla.h = data.hsla?.h || oldHue || 0
   }
 
   return {
@@ -48,7 +50,12 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
       g: rgba!.g,
       b: rgba!.b,
     },
-    hsv,
+    hsv: {
+      h: hsva!.h,
+      s: hsva!.s,
+      v: hsva!.v,
+    },
+    hsva,
     oldHue: oldHue || hsla?.h,
     a: color?.getAlpha(),
     format: color?.getFormat(),
@@ -60,7 +67,7 @@ export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
   const colors = reactive<ColorObject>({})
 
   function setColor(data: ColorObject | string) {
-    const { hsl, hsla, hex, hex8, rgba, rgb, hsv, oldHue, a } = _colorChange(data)
+    const { hsl, hsla, hex, hex8, rgba, rgb, hsv, hsva, oldHue, a } = _colorChange(data)
     colors.a = a
     colors.hsla = hsla
     colors.hsl = hsl
@@ -69,6 +76,7 @@ export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
     colors.rgba = rgba
     colors.rgb = rgb
     colors.hsv = hsv
+    colors.hsva = hsva
     colors.oldHue = oldHue
   }
 
@@ -96,6 +104,7 @@ export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
         rgba: colors.rgba,
         rgb: colors.rgb,
         hsv: colors.hsv,
+        hsva: colors.hsva,
         format: colors.format,
         a: colors.a,
       }

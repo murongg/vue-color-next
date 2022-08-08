@@ -37,12 +37,12 @@ export const Saturation = defineComponent({
       const saturation = left / containerWidth
       const bright = clamp(-(top / containerHeight) + 1, 0, 1)
       throttleHandler(onChange, {
-        hsv: {
+        hsva: {
           h: colors.hsv?.h,
           s: saturation,
           v: bright,
+          a: colors.hsva?.a,
         },
-        a: colors.hsv?.a,
         source: 'hsva',
       })
     }

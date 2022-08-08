@@ -9,7 +9,8 @@ type ColorEmitsOptions = 'update:modelValue' |
 'update:hex8' |
 'update:rgba' |
 'update:rgb' |
-'update:hsv'
+'update:hsv' |
+'update:hsva'
 
 export function useEmit(emit: EmitFn<ColorEmitsOptions>, value: OmitColorObject) {
   emit('update:modelValue', value)
@@ -20,4 +21,5 @@ export function useEmit(emit: EmitFn<ColorEmitsOptions>, value: OmitColorObject)
   emit('update:rgba', value.rgba)
   emit('update:rgb', value.rgb)
   emit('update:hsv', value.hsv)
+  emit('update:hsva', value.hsva)
 }

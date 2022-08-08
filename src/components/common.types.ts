@@ -13,7 +13,8 @@ export const commonProps = {
   hex8: String,
   rgba: Object as PropType<tinycolor.ColorFormats.RGBA>,
   rgb: Object as PropType<tinycolor.ColorFormats.RGB>,
-  hsv: Object as PropType<tinycolor.ColorFormats.HSLA>,
+  hsv: Object as PropType<tinycolor.ColorFormats.HSV>,
+  hsva: Object as PropType<tinycolor.ColorFormats.HSVA>,
 } as const
 
 export type CommonProps = ExtractPropTypes<typeof commonProps>

@@ -15,6 +15,7 @@ const colorObj = reactive<any>({
   hsl: {},
   hsla: {},
   hsv: {},
+  hsva: {},
 })
 
 </script>
@@ -54,7 +55,7 @@ const colorObj = reactive<any>({
         <Sketch
           v-model="colors" v-model:rgb="colorObj.rgb" v-model:rgba="colorObj.rgba" v-model:hsl="colorObj.hsl"
           v-model:hsla="colorObj.hsla" v-model:hex="colorObj.hex" v-model:hex8="colorObj.hex8"
-          v-model:hsv="colorObj.hsv"
+          v-model:hsv="colorObj.hsv" v-model:hsva="colorObj.hsva"
         />
         <span text-center mt-1>Sketch</span>
       </div>
