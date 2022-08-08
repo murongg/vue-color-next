@@ -62,6 +62,7 @@ const colorObj = reactive({
   hsl: {},
   hsla: {},
   hsv: {},
+  hsva: {},
 })
 </script>
 
@@ -70,6 +71,7 @@ const colorObj = reactive({
     v-model="colors" v-model:rgb="colorObj.rgb" v-model:rgba="colorObj.rgba" v-model:hsl="colorObj.hsl"
     v-model:hsla="colorObj.hsla" v-model:hex="colorObj.hex" v-model:hex8="colorObj.hex8"
     v-model:hsv="colorObj.hsv"
+    v-model:hsva="colorObj.hsva"
   />
 </template>
 ```
@@ -79,7 +81,7 @@ const colorObj = reactive({
 ## Components
 - [x] Sketch
 - [x] Chrome
-- [ ] Photoshop
+- [x] Photoshop
 - [ ] Material
 - [ ] Slider
 - [ ] Compact
@@ -92,21 +94,24 @@ const colorObj = reactive({
 
 ## Types
 ```ts
-type ModelValue = string | tinycolor.ColorInput | Omit<ColorObject, 'oldHue' | 'source'>
-type Source = 'hsl' | 'hex' | 'hex8' | 'rgba' | 'rgb' | 'hsv'
+type ModelValue = tinycolor.ColorInput & OmitColorObject
+type OmitColorObject = Omit<ColorObject, 'oldHue' | 'source'>
+type Source = 'hsl' | 'hex' | 'hex8' | 'rgba' | 'rgb' | 'hsv' | 'hsva'
 interface ColorObject {
-  hsl?: tinycolor.ColorFormats.HSL
-  hsla?: tinycolor.ColorFormats.HSLA
-  hex?: string
-  hex8?: string
-  rgba?: tinycolor.ColorFormats.RGBA
-  rgb?: tinycolor.ColorFormats.RGB
-  hsv?: tinycolor.ColorFormats.HSVA
-  format?: string
-  oldHue?: number
-  a?: number
-  source?: Source
+  hsl?: tinycolor.ColorFormats.HSL;
+  hsla?: tinycolor.ColorFormats.HSLA;
+  hex?: string;
+  hex8?: string;
+  rgba?: tinycolor.ColorFormats.RGBA;
+  rgb?: tinycolor.ColorFormats.RGB;
+  hsv?: tinycolor.ColorFormats.HSV;
+  hsva?: tinycolor.ColorFormats.HSVA;
+  format?: string;
+  oldHue?: number;
+  a?: number;
+  source?: Source;
 }
+type MaybeRef<T> = Ref<T> | T
 function useColor<T = ModelValue>(initValue: MaybeRef<T>): {
   setColor: (data: ColorObject | string) => void
   watchColor: (callback: (value: string | ModelValue) => void) => void
