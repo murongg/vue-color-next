@@ -6,18 +6,21 @@ import { Checkboard } from '../common/checkboard'
 import { EditableInput } from '../common/editableInput'
 import { Hue } from '../common/hue'
 import { isTransparent, isValidHex } from '../../helpers/color'
+import { emits } from '../common.emits'
+import { useEmit } from '../../composables/emits'
+import type { SketchProps } from './sketch.types'
 import { sketchProps } from './sketch.types'
 
 export const Sketch = defineComponent({
   name: 'Sketch',
   props: sketchProps,
-  emits: ['update:modelValue'],
-  setup(props, { emit }) {
+  emits: [...emits],
+  setup(props: SketchProps, { emit }) {
     const { modelValue } = toRefs(props)
     const { colors, setColor, watchColor } = useColor(modelValue)
-
+    useEmit(emit, colors)
     watchColor((value) => {
-      emit('update:modelValue', value)
+      useEmit(emit, value)
     })
 
     const hex = computed(() => {

@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2'
 import { isRef, reactive, unref, watch } from 'vue-demi'
-import type { ColorObject, MaybeRef, ModelValue } from '../types'
+import type { ColorObject, MaybeRef, ModelValue, OmitColorObject } from '../types'
 
 export function _colorChange(data: ColorObject | string, oldHue?: number): ColorObject {
   let color: tinycolor.Instance | undefined
@@ -60,13 +60,14 @@ export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
   const colors = reactive<ColorObject>({})
 
   function setColor(data: ColorObject | string) {
-    const { hsl, hsla, hex, hex8, rgba, hsv, oldHue, a } = _colorChange(data)
+    const { hsl, hsla, hex, hex8, rgba, rgb, hsv, oldHue, a } = _colorChange(data)
     colors.a = a
     colors.hsla = hsla
     colors.hsl = hsl
     colors.hex = hex
     colors.hex8 = hex8
     colors.rgba = rgba
+    colors.rgb = rgb
     colors.hsv = hsv
     colors.oldHue = oldHue
   }
@@ -85,24 +86,18 @@ export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
     })
   }
 
-  const watchColor = (callback: (value: string | ModelValue) => void) => {
+  const watchColor = (callback: (value: OmitColorObject) => void) => {
     watch(colors, () => {
-      let value: string | ModelValue = ''
-      if (typeof unref(initValue) === 'string') {
-        value = colors.hex8 || ''
-      }
-      else {
-        value = {
-          hsl: colors.hsl,
-          hsla: colors.hsla,
-          hex: colors.hex,
-          hex8: colors.hex8,
-          rgba: colors.rgba,
-          rgb: colors.rgb,
-          hsv: colors.hsv,
-          format: colors.format,
-          a: colors.a,
-        }
+      const value = {
+        hsl: colors.hsl,
+        hsla: colors.hsla,
+        hex: colors.hex,
+        hex8: colors.hex8,
+        rgba: colors.rgba,
+        rgb: colors.rgb,
+        hsv: colors.hsv,
+        format: colors.format,
+        a: colors.a,
       }
       callback(value)
     })

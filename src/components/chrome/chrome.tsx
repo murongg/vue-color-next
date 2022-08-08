@@ -1,23 +1,26 @@
 import { computed, defineComponent, ref, toRefs } from 'vue-demi'
 import { useColor } from '../../composables/color'
+import { useEmit } from '../../composables/emits'
 import { isValidHex } from '../../helpers/color'
+import { emits } from '../common.emits'
 import { Alpha } from '../common/alpha'
 import { Checkboard } from '../common/checkboard'
 import { EditableInput } from '../common/editableInput'
 import { Hue } from '../common/hue'
 import { Saturation } from '../common/saturation'
+import type { ChromeProps } from './chorme.types'
 import { chormeProps } from './chorme.types'
 
 export const Chrome = defineComponent({
   name: 'Chrome',
   props: chormeProps,
-  emits: ['update:modelValue'],
-  setup(props, { emit }) {
+  emits: [...emits],
+  setup(props: ChromeProps, { emit }) {
     const { modelValue } = toRefs(props)
     const { colors, setColor, watchColor } = useColor(modelValue)
-
+    useEmit(emit, colors)
     watchColor((value) => {
-      emit('update:modelValue', value)
+      useEmit(emit, value)
     })
 
     const hsl = computed(() => {

@@ -1,11 +1,8 @@
-import type { ExtractPropTypes, PropType } from 'vue-demi'
-import type { ModelValue } from '../../types'
+import type { ExtractPropTypes } from 'vue-demi'
+import { commonProps } from '../common.types'
 
 export const chormeProps = {
-  modelValue: {
-    type: [Object, String] as PropType<ModelValue>,
-    default: () => { },
-  },
+  ...commonProps,
   disableAlpha: {
     type: Boolean,
     default: false,

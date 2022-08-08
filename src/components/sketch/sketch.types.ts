@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue-demi'
-import type { ModelValue } from '../../types'
+import { commonProps } from '../common.types'
 
 export const presetColors = [
   '#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321',
@@ -9,10 +9,7 @@ export const presetColors = [
 ]
 
 export const sketchProps = {
-  modelValue: {
-    type: [Object, String] as PropType<ModelValue>,
-    default: () => { },
-  },
+  ...commonProps,
   presetColors: {
     type: Array as PropType<string[]>,
     default: () => presetColors,

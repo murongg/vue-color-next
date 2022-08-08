@@ -1,8 +1,8 @@
 import type tinycolor from 'tinycolor2'
 import type { Ref } from 'vue-demi'
 
-export type ModelValue = string | tinycolor.ColorInput | Omit<ColorObject, 'oldHue' | 'source'>
-
+export type ModelValue = tinycolor.ColorInput | OmitColorObject
+export type OmitColorObject = Omit<ColorObject, 'oldHue' | 'source'>
 export type Source = 'hsl' | 'hex' | 'hex8' | 'rgba' | 'rgb' | 'hsv'
 
 export interface ColorObject {
