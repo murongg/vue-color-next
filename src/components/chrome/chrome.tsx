@@ -8,8 +8,8 @@ import { Checkboard } from '../common/checkboard'
 import { EditableInput } from '../common/editableInput'
 import { Hue } from '../common/hue'
 import { Saturation } from '../common/saturation'
-import type { ChromeProps } from './chorme.types'
-import { chormeProps } from './chorme.types'
+import type { ChromeProps } from './chrome.types'
+import { chormeProps } from './chrome.types'
 
 export const Chrome = defineComponent({
   name: 'Chrome',
