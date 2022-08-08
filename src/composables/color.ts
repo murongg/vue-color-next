@@ -22,10 +22,14 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
   const alpha = typeof data === 'string' ? color?.getAlpha() : (data.a || color?.getAlpha())
 
   color?.setAlpha(alpha || 1)
-
   const hsla = color?.toHsl()
   const hsv = color?.toHsv()
   const rgba = color?.toRgb()
+
+  if (hsla?.s === 0) {
+    if (typeof data === 'object')
+      hsv!.h = hsla.h = data.hsla?.h || oldHue || 0
+  }
 
   return {
     hsl: {
@@ -64,6 +68,7 @@ export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
     colors.hsv = hsv
     colors.oldHue = oldHue
   }
+
   setColor(unref(initValue))
   if (isRef(initValue)) {
     watch(initValue, (value, oldValue) => {

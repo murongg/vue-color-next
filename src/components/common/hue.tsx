@@ -1,5 +1,5 @@
 import { computed, defineComponent, ref, watch } from 'vue-demi'
-import type { ColorObject } from '../../../dist'
+import type { ColorObject } from '../../types'
 import { mouseChange } from '../../helpers/common'
 
 export const Hue = defineComponent({
