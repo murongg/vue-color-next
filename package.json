@@ -55,6 +55,7 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
     "prepublishOnly": "nr build",
+    "generate": "esno scripts/generate-version.ts",
     "release": "esno scripts/release.ts",
     "start": "esno src/index.ts",
     "test": "vitest",
