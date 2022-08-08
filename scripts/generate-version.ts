@@ -20,6 +20,7 @@ try {
 `)
   execSync('npm run lint:fix', { stdio: 'inherit' })
   execSync('git add .', { stdio: 'inherit' })
-} catch (error) {
+}
+catch (error) {
   console.error(error)
 }
