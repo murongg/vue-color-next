@@ -60,6 +60,9 @@ const colors = ref('#ff0000')
   <sketch v-model="colors" />
 </template>
 ```
+
+`v-model` support value type see: [Types](#Types) `ModelValue`
+
 ## Components
 - [x] Sketch
 - [x] Chrome
@@ -76,7 +79,7 @@ const colors = ref('#ff0000')
 
 ## Types
 ```ts
-type ModelValue = string | Omit<ColorObject, 'oldHue' | 'source'>
+type ModelValue = string | tinycolor.ColorInput | Omit<ColorObject, 'oldHue' | 'source'>
 type Source = 'hsl' | 'hex' | 'hex8' | 'rgba' | 'rgb' | 'hsv'
 interface ColorObject {
   hsl?: tinycolor.ColorFormats.HSL

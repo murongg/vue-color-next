@@ -18,6 +18,8 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
     color = tinycolor(data.rgba)
   else if (data.rgb)
     color = tinycolor(data.rgb)
+  else if (data instanceof tinycolor)
+    color = tinycolor(data)
 
   const alpha = typeof data === 'string' ? color?.getAlpha() : (data.a || color?.getAlpha())
 
