@@ -3,7 +3,12 @@ import type { ModelValue } from '../../src/types'
 const colors = ref<ModelValue>('#84ACDAFF')
 
 const color = computed(() => {
-  const color = typeof colors.value === 'string' ? colors.value : colors.value.hex
+  let color = ''
+  if (typeof colors.value === 'string') { color = colors.value }
+  else {
+    const rgba = colors.value.rgba
+    color = `rgba(${rgba?.a}, ${rgba?.g}, ${rgba?.b}, ${rgba?.a})`
+  }
   return color
 })
 
@@ -34,8 +39,8 @@ const colorObj = reactive<any>({
     </h2>
     <div mt-10 flex flex-wrap justify-between>
       <div
-        v-for="obj in Object.keys(colorObj)" :key="obj" h="200px" mb-8 mr-8 flex-1 shadow-xl inline-block px-5 py-4 bg-white
-        rounded-1 opacity-80 hover:opacity-100 :style="{ color: color }"
+        v-for="obj in Object.keys(colorObj)" :key="obj" h="200px" mb-8 mr-8 flex-1 shadow-xl inline-block px-5 py-4
+        bg-white rounded-1 opacity-80 hover:opacity-100 :style="{ color: color }"
       >
         <div text="center" mb-2 font-extrabold>
           {{ obj.toLocaleUpperCase() }}
