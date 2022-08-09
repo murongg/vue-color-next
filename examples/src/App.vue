@@ -1,15 +1,21 @@
 <script setup lang="ts">
+import type { StyleValue } from 'vue'
 import type { ModelValue } from '../../src/types'
 const colors = ref<ModelValue>('#84ACDAFF')
 
 const color = computed(() => {
-  let color = ''
-  if (typeof colors.value === 'string') { color = colors.value }
-  else {
-    const rgba = colors.value.rgba
-    color = `rgba(${rgba?.a}, ${rgba?.g}, ${rgba?.b}, ${rgba?.a})`
+  return typeof colors.value === 'string' ? colors.value : colors.value.hex
+})
+const main = ref(null)
+const { width: bgWidth, height: bgHeight } = useElementSize(main)
+
+const bgStyle = computed<StyleValue>(() => {
+  return {
+    background: color.value,
+    opacity: colors.value.a || 0,
+    height: `${bgHeight.value + 80}px`,
+    width: `${bgWidth.value + 32}px`,
   }
-  return color
 })
 
 const colorObj = reactive<any>({
@@ -26,7 +32,8 @@ const colorObj = reactive<any>({
 </script>
 
 <template>
-  <main font-sans w-screen min-h-screen p="x-4 y-10" text="white dark:gray-200" :style="{ background: color }">
+  <main ref="main" relative font-sans w-screen min-h-screen p="x-4 y-10" text="white dark:gray-200">
+    <div absolute top-0 left-0 z--9999 :style="bgStyle" />
     <a
       href="https://github.com/murongg/vue-color-next" target="_blank" absolute text-4xl right-5 top-5 icon-btn
       i-carbon-logo-github
@@ -55,7 +62,7 @@ const colorObj = reactive<any>({
         </div>
       </div>
     </div>
-    <div flex>
+    <div flex flex-wrap>
       <div flex flex-col mr-5>
         <Sketch
           v-model="colors" v-model:rgb="colorObj.rgb" v-model:rgba="colorObj.rgba" v-model:hsl="colorObj.hsl"
