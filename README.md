@@ -82,7 +82,7 @@ const colorObj = reactive({
 - [x] Sketch
 - [x] Chrome
 - [x] Photoshop
-- [ ] Material
+- [x] Material
 - [ ] Slider
 - [ ] Compact
 - [ ] Grayscale

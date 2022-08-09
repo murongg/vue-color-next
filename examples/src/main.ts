@@ -9,6 +9,7 @@ import '../../src/styles/common.css'
 import '../../src/styles/sketch.css'
 import '../../src/styles/chrome.css'
 import '../../src/styles/photoshop.css'
+import '../../src/styles/material.css'
 
 const app = createApp(App)
 app.use(VueColor)
