@@ -2,7 +2,7 @@ import tinycolor from 'tinycolor2'
 import { isRef, reactive, unref, watch } from 'vue-demi'
 import type { ColorObject, MaybeRef, ModelValue, OmitColorObject } from '../types'
 
-export function _colorChange(data: ColorObject | string, oldHue?: number): ColorObject {
+function _colorChange(data: ColorObject | string, oldHue?: number): ColorObject {
   let color: tinycolor.Instance | undefined
   if (typeof data === 'string')
     color = tinycolor(data)
