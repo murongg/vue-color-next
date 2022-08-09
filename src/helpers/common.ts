@@ -1,4 +1,5 @@
 import type { Ref } from 'vue-demi'
+import { throttle } from 'throttle-debounce'
 
 export function mouseChange(e: MouseEvent | TouchEvent, skip = false, container: Ref<HTMLElement | null>) {
   !skip && e.preventDefault()
@@ -23,3 +24,7 @@ export function mouseChange(e: MouseEvent | TouchEvent, skip = false, container:
     pageY,
   }
 }
+
+export const throttleHandler = throttle(20, (fn: Function, ...args: any[]) => {
+  fn(...args)
+}, { noLeading: true, noTrailing: false })

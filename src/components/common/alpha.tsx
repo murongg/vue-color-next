@@ -1,6 +1,6 @@
 import { computed, defineComponent, ref } from 'vue-demi'
 import type { ColorObject } from '../../../dist'
-import { mouseChange } from '../../helpers/common'
+import { mouseChange, throttleHandler } from '../../helpers/common'
 import { Checkboard } from './checkboard'
 
 export const Alpha = defineComponent({
@@ -20,6 +20,10 @@ export const Alpha = defineComponent({
       }
     })
 
+    const onChange = (...param: any) => {
+      emit('change', ...param)
+    }
+
     const handleChange = (e: MouseEvent | TouchEvent, skip = false) => {
       const changeResult = mouseChange(e, skip, container)
       if (!changeResult)
@@ -36,7 +40,7 @@ export const Alpha = defineComponent({
         a = Math.round(left * 100 / containerWidth) / 100
 
       if (colors.a !== a) {
-        emit('change', {
+        throttleHandler(onChange, {
           hsla: {
             h: colors.hsl?.h,
             s: colors.hsl?.s,

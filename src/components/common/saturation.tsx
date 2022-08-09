@@ -1,12 +1,7 @@
-import { throttle } from 'throttle-debounce'
 import clamp from 'clamp'
 import { computed, defineComponent, ref, watch } from 'vue-demi'
-import { mouseChange } from '../../helpers/common'
+import { mouseChange, throttleHandler } from '../../helpers/common'
 import type { ColorObject } from '../../types'
-
-const throttleHandler = throttle(20, (fn: Function, ...args: any[]) => {
-  fn(...args)
-}, { noLeading: true, noTrailing: false })
 
 export const Saturation = defineComponent({
   name: 'Saturation',

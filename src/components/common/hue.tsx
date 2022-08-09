@@ -1,6 +1,6 @@
 import { computed, defineComponent, ref, watch } from 'vue-demi'
 import type { ColorObject } from '../../types'
-import { mouseChange } from '../../helpers/common'
+import { mouseChange, throttleHandler } from '../../helpers/common'
 
 export const Hue = defineComponent({
   name: 'Hue',
@@ -57,6 +57,10 @@ export const Hue = defineComponent({
       }
     })
 
+    const onChange = (...param: any) => {
+      emit('change', ...param)
+    }
+
     const handleChange = (e: MouseEvent | TouchEvent, skip = false) => {
       const changeResult = mouseChange(e, skip, container)
       if (!changeResult)
@@ -81,7 +85,7 @@ export const Hue = defineComponent({
         }
 
         if (colors.hsla?.h !== h) {
-          emit('change', {
+          throttleHandler(onChange, {
             hsla: {
               h,
               s: colors.hsla?.s,
@@ -89,7 +93,7 @@ export const Hue = defineComponent({
               a: colors.hsla?.a,
             },
             source: 'hsla',
-          })
+          }, oldHue.value)
         }
       }
       else {
@@ -105,7 +109,7 @@ export const Hue = defineComponent({
         }
 
         if (colors.hsla?.h !== h) {
-          emit('change', {
+          throttleHandler(onChange, {
             hsla: {
               h,
               s: colors.hsla?.s,
@@ -113,7 +117,7 @@ export const Hue = defineComponent({
               a: colors.hsla?.a,
             },
             source: 'hsla',
-          })
+          }, oldHue.value)
         }
       }
     }
