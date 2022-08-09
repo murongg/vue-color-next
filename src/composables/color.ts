@@ -33,8 +33,9 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
   if (hsla?.s === 0) {
     if (typeof data === 'object')
       hsva!.h = hsla.h = data.hsla?.h || oldHue || 0
+    else
+      hsva!.h = hsla.h = oldHue || 0
   }
-
   return {
     hsl: {
       h: hsla?.h || 0,
@@ -66,8 +67,8 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
 export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
   const colors = reactive<ColorObject>({})
 
-  function setColor(data: ColorObject | string) {
-    const { hsl, hsla, hex, hex8, rgba, rgb, hsv, hsva, oldHue, a } = _colorChange(data)
+  function setColor(data: ColorObject | string, oldhue?: number) {
+    const { hsl, hsla, hex, hex8, rgba, rgb, hsv, hsva, oldHue, a } = _colorChange(data, oldhue)
     colors.a = a
     colors.hsla = hsla
     colors.hsl = hsl

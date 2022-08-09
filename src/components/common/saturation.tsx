@@ -1,11 +1,11 @@
 import { throttle } from 'throttle-debounce'
 import clamp from 'clamp'
-import { computed, defineComponent, ref } from 'vue-demi'
+import { computed, defineComponent, ref, watch } from 'vue-demi'
 import { mouseChange } from '../../helpers/common'
 import type { ColorObject } from '../../types'
 
-const throttleHandler = throttle(20, (fn: Function, data: any) => {
-  fn(data)
+const throttleHandler = throttle(20, (fn: Function, ...args: any[]) => {
+  fn(...args)
 }, { noLeading: true, noTrailing: false })
 
 export const Saturation = defineComponent({
@@ -18,12 +18,17 @@ export const Saturation = defineComponent({
     const container = ref<HTMLElement | null>(null)
     const colors = props.colors as ColorObject
 
-    const bgColor = computed(() => `hsl(${colors.hsv?.h}, 100%, 50%)`)
+    const bgColor = computed(() => `hsl(${colors.hsl?.h}, 100%, 50%)`)
     const pointerTop = computed(() => `${(-((colors?.hsv?.v || 0) * 100) + 1) + 100}%`)
     const pointerLeft = computed(() => `${(colors?.hsv?.s || 0) * 100}%`)
 
-    const onChange = (param: any) => {
-      emit('change', param)
+    const oldHue = ref(0)
+    watch(() => colors.hsl?.h, () => {
+      oldHue.value = colors.hsl?.h || 0
+    })
+
+    const onChange = (...param: any) => {
+      emit('change', ...param)
     }
 
     const handleChange = (e: MouseEvent | TouchEvent, skip = false) => {
@@ -44,7 +49,7 @@ export const Saturation = defineComponent({
           a: colors.hsva?.a,
         },
         source: 'hsva',
-      })
+      }, oldHue.value)
     }
 
     const unbindEventListeners = () => {
