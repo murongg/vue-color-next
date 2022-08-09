@@ -76,6 +76,10 @@ const colorObj = reactive<any>({
         <Material v-model="colors" />
         <span text-center mt-1>Material</span>
       </div>
+      <div flex flex-col mr-5>
+        <Slider v-model="colors" />
+        <span text-center mt-1>Material</span>
+      </div>
     </div>
   </main>
 </template>
