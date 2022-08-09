@@ -4,6 +4,7 @@ import { Chrome } from './chrome'
 import { Photoshop } from './photoshop'
 import { Material } from './material'
 import { Slider } from './slider'
+import { Compact } from './compact'
 
 export {
   Sketch,
@@ -11,6 +12,7 @@ export {
   Photoshop,
   Material,
   Slider,
+  Compact,
 }
 
 export default [
@@ -19,4 +21,5 @@ export default [
   Photoshop,
   Material,
   Slider,
+  Compact,
 ] as Plugin[]

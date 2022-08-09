@@ -11,6 +11,7 @@ import '../../src/styles/chrome.css'
 import '../../src/styles/photoshop.css'
 import '../../src/styles/material.css'
 import '../../src/styles/slider.css'
+import '../../src/styles/compact.css'
 
 const app = createApp(App)
 app.use(VueColor)
