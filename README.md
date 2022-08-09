@@ -112,7 +112,7 @@ interface ColorObject {
   source?: Source;
 }
 type MaybeRef<T> = Ref<T> | T
-function useColor<T = ModelValue>(initValue: MaybeRef<T>): {
+function useColor(initValue: MaybeRef<ModelValue>): {
   setColor: (data: ColorObject | string) => void
   watchColor: (callback: (value: string | ModelValue) => void) => void
   colors: ColorObject

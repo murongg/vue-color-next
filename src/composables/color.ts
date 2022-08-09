@@ -25,7 +25,7 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
 
   const alpha = typeof data === 'string' ? color?.getAlpha() : (data.a || color?.getAlpha())
 
-  color?.setAlpha(alpha || 1)
+  color?.setAlpha(alpha || 0)
   const hsla = color?.toHsl()
   const hsva = color?.toHsv()
   const rgba = color?.toRgb()
@@ -64,7 +64,14 @@ export function _colorChange(data: ColorObject | string, oldHue?: number): Color
   }
 }
 
-export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
+function hasSetValue(value: ModelValue, oldValue: ModelValue) {
+  if (typeof value === 'string')
+    return false
+  else
+    return value.hex !== oldValue.hex || value.a !== oldValue.a || value.hex8 !== oldValue.hex8
+}
+
+export function useColor(initValue: MaybeRef<ModelValue>) {
   const colors = reactive<ColorObject>({})
 
   function setColor(data: ColorObject | string, oldhue?: number) {
@@ -89,7 +96,7 @@ export function useColor<T = ModelValue>(initValue: MaybeRef<T>) {
           setColor(value)
       }
       else {
-        if ((initValue.value as ColorObject).hex !== (oldValue as ColorObject).hex)
+        if (hasSetValue(value, oldValue))
           setColor(value)
       }
     })
