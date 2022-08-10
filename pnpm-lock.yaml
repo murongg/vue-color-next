@@ -16,6 +16,7 @@ importers:
       '@types/gulp': ^4.0.9
       '@types/gulp-clean-css': ^4.3.0
       '@types/gulp-rename': ^2.0.1
+      '@types/material-colors': ^1.2.0
       '@types/node': ^17.0.35
       '@types/throttle-debounce': ^5.0.0
       '@types/through2': ^2.0.36
@@ -34,6 +35,7 @@ importers:
       husky: ^8.0.1
       jsdom: ^20.0.0
       lint-staged: ^13.0.0
+      material-colors: ^1.2.6
       pnpm: ^7.1.5
       rimraf: ^3.0.2
       rollup: ^2.77.2
@@ -52,6 +54,7 @@ importers:
       vue-demi: ^0.13.6
     dependencies:
       clamp: 1.0.1
+      material-colors: 1.2.6
       throttle-debounce: 5.0.0
       tinycolor2: 1.4.2
       vue-demi: 0.13.6_3nmzzoefrdru4lagmst3ha3a3q
@@ -68,6 +71,7 @@ importers:
       '@types/gulp': 4.0.9
       '@types/gulp-clean-css': 4.3.0
       '@types/gulp-rename': 2.0.1
+      '@types/material-colors': 1.2.0
       '@types/node': 17.0.45
       '@types/throttle-debounce': 5.0.0
       '@types/through2': 2.0.36
@@ -938,6 +942,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/material-colors/1.2.0:
+    resolution: {integrity: sha512-hJ8jwFPoiUsw+UO2a+hwnjNjeGbI+LisXPCOmEwaXsiVueYZ4qS++PvC0evP30p3Q9AysYEDc40btmxtO+q07A==}
     dev: true
 
   /@types/mdast/3.0.10:
@@ -5266,6 +5274,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /material-colors/1.2.6:
+    resolution: {integrity: sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==}
+    dev: false
 
   /mdast-util-from-markdown/0.8.5:
     resolution: {integrity: sha512-2hkTXtYYnr+NubD/g6KGBS/0mFmBcifAsI0yIWRiRo0PjVs6SSOSOdtzbp6kSGnShDN6G5aWZpKQ2lWRy27mWQ==}

@@ -6,6 +6,7 @@ import { Material } from './material'
 import { Slider } from './slider'
 import { Compact } from './compact'
 import { Grayscale } from './grayscale'
+import { Swatches } from './swatches'
 
 export {
   Sketch,
@@ -15,6 +16,7 @@ export {
   Slider,
   Compact,
   Grayscale,
+  Swatches,
 }
 
 export default [
@@ -25,4 +27,5 @@ export default [
   Slider,
   Compact,
   Grayscale,
+  Swatches,
 ] as Plugin[]

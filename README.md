@@ -86,7 +86,7 @@ const colorObj = reactive({
 - [x] Slider
 - [x] Compact
 - [x] Grayscale
-- [ ] Swatches
+- [x] Swatches
 - [ ] Twitter
 
 ## Composables
