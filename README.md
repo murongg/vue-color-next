@@ -87,7 +87,7 @@ const colorObj = reactive({
 - [x] Compact
 - [x] Grayscale
 - [x] Swatches
-- [ ] Twitter
+- [x] Twitter
 
 ## Composables
 - [x] useColor

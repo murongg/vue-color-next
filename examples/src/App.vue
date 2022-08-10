@@ -44,7 +44,7 @@ const colorObj = reactive<any>({
     <h2 text-2xl text-center mt-4>
       🎨 Vue Color Picker Component for Vue 3.x
     </h2>
-    <div mt-10 flex flex-wrap justify-between>
+    <div mt-8 flex flex-wrap justify-between>
       <div
         v-for="obj in Object.keys(colorObj)" :key="obj" h="200px" mb-8 mr-8 flex-1 shadow-xl inline-block px-5 py-4
         bg-white rounded-1 opacity-80 hover:opacity-100 :style="{ color: color }"
@@ -63,32 +63,40 @@ const colorObj = reactive<any>({
       </div>
     </div>
     <div flex flex-wrap>
-      <div flex flex-col mr-5>
-        <Sketch
-          v-model="colors" v-model:rgb="colorObj.rgb" v-model:rgba="colorObj.rgba" v-model:hsl="colorObj.hsl"
-          v-model:hsla="colorObj.hsla" v-model:hex="colorObj.hex" v-model:hex8="colorObj.hex8"
-          v-model:hsv="colorObj.hsv" v-model:hsva="colorObj.hsva"
-        />
-        <span text-center mt-1>Sketch</span>
+      <div flex flex-col>
+        <div flex>
+          <div flex flex-col mr-5>
+            <Chrome v-model="colors" />
+            <span text-center mt-1>Chrome</span>
+          </div>
+          <div flex flex-col mr-5>
+            <Sketch
+              v-model="colors" v-model:rgb="colorObj.rgb" v-model:rgba="colorObj.rgba" v-model:hsl="colorObj.hsl"
+              v-model:hsla="colorObj.hsla" v-model:hex="colorObj.hex" v-model:hex8="colorObj.hex8"
+              v-model:hsv="colorObj.hsv" v-model:hsva="colorObj.hsva"
+            />
+            <span text-center mt-1>Sketch</span>
+          </div>
+        </div>
+        <div mt--5>
+          <Twitter v-model="colors" />
+          <span text-center mt-1>Twitter</span>
+        </div>
       </div>
-      <div flex flex-col mr-5>
-        <Chrome v-model="colors" />
-        <span text-center mt-1>Chrome</span>
-      </div>
+
       <div flex flex-col mr-5>
         <Photoshop v-model="colors" />
         <span text-center mt-1>Photoshop</span>
       </div>
-
       <div flex flex-col flex-wrap mr-5>
         <div flex>
           <div>
-            <Swatches v-model="colors" mt-5 />
+            <Swatches v-model="colors" />
             <span text-center mt-1>Swatches</span>
           </div>
           <div ml-5>
             <div>
-              <Compact v-model="colors" mt-5 />
+              <Compact v-model="colors" />
               <span text-center mt-1>Compact</span>
             </div>
             <div flex>

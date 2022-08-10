@@ -14,6 +14,7 @@ import '../../src/styles/slider.css'
 import '../../src/styles/compact.css'
 import '../../src/styles/grayscale.css'
 import '../../src/styles/swatches.css'
+import '../../src/styles/twitter.css'
 
 const app = createApp(App)
 app.use(VueColor)

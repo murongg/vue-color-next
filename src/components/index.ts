@@ -7,6 +7,7 @@ import { Slider } from './slider'
 import { Compact } from './compact'
 import { Grayscale } from './grayscale'
 import { Swatches } from './swatches'
+import { Twitter } from './twitter'
 
 export {
   Sketch,
@@ -17,6 +18,7 @@ export {
   Compact,
   Grayscale,
   Swatches,
+  Twitter,
 }
 
 export default [
@@ -28,4 +30,5 @@ export default [
   Compact,
   Grayscale,
   Swatches,
+  Twitter,
 ] as Plugin[]
