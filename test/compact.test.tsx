@@ -11,7 +11,7 @@ describe('Compact Component', () => {
     expect(wrapper.classes()).toContain('vc-compact')
   })
 
-  it('swatches', async () => {
+  it('palette', async () => {
     const palettes = reactive(['#4D4D4D', '#999999', '#FFFFFF', '#F44E3B', '#FE9200', '#FCDC00'])
     const wrapper = mount(() => <Compact v-model={colors.value} palette={palettes} />)
     expect(wrapper.findAll('.vc-compact-color-item').length).toBe(palettes.length)
