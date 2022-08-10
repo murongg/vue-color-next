@@ -5,6 +5,7 @@ import { Photoshop } from './photoshop'
 import { Material } from './material'
 import { Slider } from './slider'
 import { Compact } from './compact'
+import { Grayscale } from './grayscale'
 
 export {
   Sketch,
@@ -13,6 +14,7 @@ export {
   Material,
   Slider,
   Compact,
+  Grayscale,
 }
 
 export default [
@@ -22,4 +24,5 @@ export default [
   Material,
   Slider,
   Compact,
+  Grayscale,
 ] as Plugin[]

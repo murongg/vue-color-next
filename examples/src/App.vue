@@ -80,15 +80,19 @@ const colorObj = reactive<any>({
         <span text-center mt-1>Photoshop</span>
       </div>
       <div flex flex-col flex-wrap mr-5>
-        <div flex justify-between>
+        <div flex>
           <div>
             <Material v-model="colors" />
             <span text-center mt-1>Material</span>
           </div>
-          <div>
-            <Compact v-model="colors" mt-5 />
-            <span text-center mt-1>Compact</span>
+          <div ml-10>
+            <Grayscale v-model="colors" />
+            <span text-center mt-1>Grayscale</span>
           </div>
+        </div>
+        <div>
+          <Compact v-model="colors" mt-5 />
+          <span text-center mt-1>Compact</span>
         </div>
         <div>
           <Slider v-model="colors" mt-5 />

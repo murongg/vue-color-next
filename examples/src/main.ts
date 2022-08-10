@@ -12,6 +12,7 @@ import '../../src/styles/photoshop.css'
 import '../../src/styles/material.css'
 import '../../src/styles/slider.css'
 import '../../src/styles/compact.css'
+import '../../src/styles/grayscale.css'
 
 const app = createApp(App)
 app.use(VueColor)
